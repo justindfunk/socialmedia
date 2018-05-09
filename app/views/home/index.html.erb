@@ -1,0 +1,7 @@
+<% unless current_user.nil? %>
+<%= render 'hooks/form', hook: (@hook.nil? ? Article.new : @hook), parent: nil %>
+    <% current_user.feed.each do |hook| %>
+  <%= render hook %>
+  <% end %>
+
+<% end %>

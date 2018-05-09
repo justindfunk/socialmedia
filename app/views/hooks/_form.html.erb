@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#newHook" aria-expanded="false" aria-controls="newHook">
+      New <%= hook.class.name.titlecase %>
+    </button>
+  </div>
+  <div class="panel-body collapse" id="newHook">
+    <%= bootstrap_form_for(parent.nil? ? hook : [parent.becomes(Hook), hook]) do |f| %>
+        <%= f.error_summary %>
+        <%= f.text_field :name, hide_label: true, placeholder: hook.title_label %>
+        <%= f.text_area :content, hide_label: true, placeholder: hook.content_label %>
+        <% unless hook.class == Group %>
+        <div class="nested_fields">
+          <%= link_to_add_association 'Embed a link', f, :hyperlinks, partial: 'hyperlinks/hyperlink_fields', 'data-association-insertion-traversal': 'next' %>
+        </div>
+        <% end %>
+        <% if !parent.nil? && parent.type == 'Tag' %>
+            <% f.object.tags << parent %>
+        <% end %>
+        <div class="sub_form form-inline">
+          <div>
+            <%= f.label 'Tags' %>
+            <%= link_to_add_association 'Add Tag', f, :tags, partial: 'tags/tag_fields', 'data-association-insertion-traversal': 'closest', 'data-association-insertion-node': '.sub_form', 'data-association-insertion-method': 'append' %>
+            <%= f.fields_for :tags do |sf| %>
+                <%= sf.hidden_field :name %>
+                <div><%= sf.object.name %></div>
+            <% end %>
+          </div>
+        </div>
+        <%= f.submit 'Post' %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $('#new_article').on('cocoon:before-insert', function(e, insertedItem) {
+    $( insertedItem ).find('input').autocomplete({
+      source: '<%= root_url %>tags.json',
+      select: function(event,ui) {
+        event.target.readOnly = true;
+      }
+    });
+  });
+</script>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  hook: one
+  rating: 9.99
+
+two:
+  user: two
+  hook: two
+  rating: 9.99

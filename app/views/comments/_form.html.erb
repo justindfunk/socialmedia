@@ -1,0 +1,4 @@
+<%= bootstrap_form_for([hook.becomes(Hook), Comment.new]) do |f| %>
+    <%= f.text_area :content %>
+    <%= f.submit %>
+<% end %>

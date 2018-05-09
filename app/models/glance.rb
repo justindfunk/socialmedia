@@ -1,0 +1,3 @@
+class Glance < Impression
+
+end

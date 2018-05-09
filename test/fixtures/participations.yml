@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  hook: one
+  type: 
+
+two:
+  user: two
+  hook: two
+  type: 

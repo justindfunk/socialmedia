@@ -1,0 +1,13 @@
+<div class="panel panel-default" onclick="document.location = '<%= article_path(article) %>';">
+  <div class="panel-body <%= current_user.seens.include?(article) ? '' : 'bg-info' %>">
+    <%= article.content %>
+    </div>
+  <div class="panel-footer">
+    by <%= link_to article.owner.username, article.owner.profile, onclick: "event.stopPropagation();" %> <%= time_ago_in_words(article.created_at, include_seconds: true) %> ago
+    <div class="pull-right">
+    <% article.tags.each do |tag| %>
+      <%= render tag %>
+    <% end %>
+    </div>
+  </div>
+  </div>

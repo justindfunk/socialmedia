@@ -1,0 +1,8 @@
+<% if current_user.hooks.include?(tag) %>
+    Interested
+<% else %>
+    <%= bootstrap_form_for(Interest.new(hook: tag)) do |f| %>
+        <%= f.hidden_field :hook_id %>
+        <%= f.submit 'Add To Interests' %>
+    <% end %>
+<% end %>

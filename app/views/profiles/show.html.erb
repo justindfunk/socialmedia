@@ -1,0 +1,5 @@
+<%= render 'hooks/header', hook: @hook %>
+<%= render 'hooks/form', hook: (@new_hook.nil? ? Article.new : @new_hook), parent: @hook %>
+<% @hook.posts.each do |hook| %>
+    <%= render hook %>
+<% end %>
